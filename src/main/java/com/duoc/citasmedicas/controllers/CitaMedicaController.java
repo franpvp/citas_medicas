@@ -34,6 +34,7 @@ public class CitaMedicaController {
         List<EntityModel<CitaMedicaDTO>> citaModels = citas.stream()
                 .map(cita -> EntityModel.of(cita,
                         linkTo(methodOn(CitaMedicaController.class).getCitasById(cita.getIdCita())).withSelfRel(),
+                        linkTo(methodOn(CitaMedicaController.class).modificarCita(cita.getIdCita(), new CitaMedicaDTO())).withRel("modificarCita"),
                         linkTo(methodOn(CitaMedicaController.class).eliminarCitaMedicaById(cita.getIdCita())).withRel("eliminarCita")
                 ))
                 .collect(Collectors.toList());
@@ -50,6 +51,7 @@ public class CitaMedicaController {
 
         EntityModel<CitaMedicaDTO> citaModel = EntityModel.of(cita,
                 linkTo(methodOn(CitaMedicaController.class).getCitasById(idCita)).withSelfRel(),
+                linkTo(methodOn(CitaMedicaController.class).modificarCita(idCita, new CitaMedicaDTO())).withRel("modificarCita"),
                 linkTo(methodOn(CitaMedicaController.class).eliminarCitaMedicaById(idCita)).withRel("eliminarCita"),
                 linkTo(methodOn(CitaMedicaController.class).obtenerCitasMedicas()).withRel("allCitas"));
 
@@ -74,7 +76,7 @@ public class CitaMedicaController {
     }
 
     @PutMapping("/modificar-cita/{id-cita}")
-    public ResponseEntity<EntityModel<CitaMedicaDTO>> modificarEstadoEnvio(
+    public ResponseEntity<EntityModel<CitaMedicaDTO>> modificarCita(
             @PathVariable("id-cita") int idCita,
             @Valid @RequestBody(required = true) CitaMedicaDTO nuevaCitaMedicaDTO
     ) {
@@ -98,6 +100,7 @@ public class CitaMedicaController {
 
         EntityModel<CitaMedicaDTO> citaModel = EntityModel.of(citaCreada,
                 linkTo(methodOn(CitaMedicaController.class).getCitasById(citaCreada.getIdCita())).withSelfRel(),
+                linkTo(methodOn(CitaMedicaController.class).modificarCita(citaCreada.getIdCita(), new CitaMedicaDTO())).withRel("modificarCita"),
                 linkTo(methodOn(CitaMedicaController.class).eliminarCitaMedicaById(citaCreada.getIdCita())).withRel("eliminarCita"),
                 linkTo(methodOn(CitaMedicaController.class).obtenerCitasMedicas()).withRel("allCitas"));
 

@@ -4,10 +4,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class MedicoDTO {
 
@@ -37,5 +41,6 @@ public class MedicoDTO {
     @NotNull(message = "El campo idEspecialidad no puede estar vacío")
     @Positive(message = "El campo idEspecialidad debe ser un número positivo")
     private int idEspecialidad;
+
 
 }
